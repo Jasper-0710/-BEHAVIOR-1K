@@ -23,7 +23,8 @@ def main():
 
     It loads Rs_int with a robot, and the robot picks and places an apple.
     """
-    robot_options = ["R1", "Tiago"]
+    # robot_options = ["R1", "Tiago"]
+    robot_options = [ "R1"]
     robot_type = choose_from_options(options=robot_options, name="robot options", random_selection=False)
 
     # Load the config

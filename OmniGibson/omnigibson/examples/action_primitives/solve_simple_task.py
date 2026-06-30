@@ -7,6 +7,7 @@ from omnigibson.action_primitives.starter_semantic_action_primitives import (
     StarterSemanticActionPrimitives,
     StarterSemanticActionPrimitiveSet,
 )
+from omnigibson.robots.tiago import Tiago
 
 # Don't use GPU dynamics and use flatcache for performance boost
 # gm.USE_GPU_DYNAMICS = True
@@ -34,18 +35,35 @@ def main():
     config["objects"] = [
         {
             "type": "DatasetObject",
-            "name": "cologne",
-            "category": "bottle_of_cologne",
-            "model": "lyipur",
+            "name": "cold_cream",
+            "category": "bottle_of_cold_cream",
+            "model": "lyzvuk",
             "position": [-0.3, -0.8, 0.5],
             "orientation": [0, 0, 0, 1],
         },
         {
             "type": "DatasetObject",
+            "name": "bottle_of_wine",
+            "category": "bottle_of_wine",
+            "model": "bmudli",
+            "position": [-0.3, -1.2, 0.5],
+            "orientation": [0, 0, 0, 1],
+        },
+            {
+            "type": "DatasetObject",
+            "name": "bottle_of_lemon_sauce",
+            "category": "bottle_of_lemon_sauce",
+            "model": "iyijeb",
+            "position": [-0.3, -1.2, 0.5],
+            "orientation": [0, 0, 0, 1],
+        },
+        {
+            "type": "DatasetObject",
             "name": "table",
-            "category": "breakfast_table",
-            "model": "rjgmmy",
-            "scale": [0.3, 0.3, 0.3],
+            "category": "coffee_table",
+            "model": "cjjayg",
+            "scale": [0.5, 0.5, 0.5],
+            "scale": [0.5, 0.5, 0.5],
             "position": [-0.7, 0.5, 0.2],
             "orientation": [0, 0, 0, 1],
         },

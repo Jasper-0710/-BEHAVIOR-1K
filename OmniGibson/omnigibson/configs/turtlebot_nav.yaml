@@ -51,23 +51,25 @@ robots:
 
 objects: []
 
-task:
+  task:
   type: PointNavigationTask
   robot_idn: 0
   floor: 0
   initial_pos: null
+  # initial_pos: [0,0,0.1]
   initial_quat: null
   goal_pos: null
   goal_tolerance: 0.36    # turtlebot bodywidth
   goal_in_polar: false
   path_range: [1.0, 10.0]
   visualize_goal: true
-  visualize_path: false
+  visualize_path: true
   n_vis_waypoints: 25
-  reward_type: geodesic
+  # reward_type: geodesic
+  reward_type: l2
   termination_config:
     max_collisions: 500
-    max_steps: 500
+    max_steps: 1000
     fall_height: 0.03
   reward_config:
     r_potential: 1.0

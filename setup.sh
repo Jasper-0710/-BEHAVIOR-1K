@@ -215,7 +215,7 @@ if [ "$NEW_ENV" = true ]; then
     # Create environment with only Python 3.10
     conda create -n behavior python=3.10 -c conda-forge -y
     conda activate behavior
-
+    unset PYTHONPATH
     [[ "$CONDA_DEFAULT_ENV" != "behavior" ]] && { echo "ERROR: Failed to activate environment"; exit 1; }
 
     # Install numpy and setuptools via pip
