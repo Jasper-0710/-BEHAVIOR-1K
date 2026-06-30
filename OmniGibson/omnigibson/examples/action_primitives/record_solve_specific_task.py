@@ -25,7 +25,7 @@ from omnigibson.utils.ui_utils import KeyboardEventHandler
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
 DATASET_SCENES_DIR = os.path.join(REPO_ROOT, "datasets", "behavior-1k-assets", "scenes")
-DEFAULT_SCENE_MODEL = "Pomaria_2_int_data_collection_3"
+DEFAULT_SCENE_MODEL = "Pomaria_2_int_data_collection_5"
 STANDBY_STEPS = 90
 LOOK_AT_STEPS = 90
 FACE_TARGET_STEPS = 120
@@ -823,6 +823,17 @@ def print_traversability_map_info(scene):
         print("[trav-map] floor", floor, "file:", os.path.join(layout_dir, map_name.format(floor)))
 
 
+def rotate_robot_initial_yaw(robot, yaw_delta=math.pi):
+    """Rotate the loaded robot in-place after scene initialization."""
+    pos, quat = robot.get_position_orientation()
+    euler = T.quat2euler(quat)
+    old_yaw = euler[2].item()
+    euler[2] = wrap_angle(euler[2] + yaw_delta)
+    new_quat = T.euler2quat(euler)
+    robot.set_position_orientation(position=pos, orientation=new_quat)
+    print(f"[init] Rotated robot yaw by {yaw_delta:.3f} rad: {old_yaw:.3f} -> {euler[2].item():.3f}")
+
+
 def build_config(scene_model=DEFAULT_SCENE_MODEL, scene_file=None):
     # 从 tiago_primitives.yaml 继承机器人和控制器配置，再覆盖当前 demo 的场景。
     # 物体不再硬编码创建，而是从 create_scene.py 保存出的 scene JSON 里加载。
@@ -833,6 +844,10 @@ def build_config(scene_model=DEFAULT_SCENE_MODEL, scene_file=None):
     config["scene"]["scene_file"] = scene_json_path(scene_model, scene_file)
     config["scene"]["load_object_categories"] = None
     config["objects"] = []
+    # Face the robot toward the pick table for this recording setup.
+    # Tiago's holonomic base joints are x / y / z / rx / ry / rz, so yaw is index 5.
+    config["robots"][0]["reset_joint_pos"][2] = 0.0
+    config["robots"][0]["reset_joint_pos"][5] = math.pi
     # Only change Tiago's onboard robot cameras for LeRobot recording.
     # /viewer_camera is still patched separately to skip its RGB annotator.
     config["robots"][0]["sensor_config"] = {
@@ -888,6 +903,7 @@ def main(scene_model=DEFAULT_SCENE_MODEL, scene_file=None, task_config_file=None
     env = og.Environment(configs=build_config(scene_model=scene_model, scene_file=scene_file))
     scene = env.scene
     robot = env.robots[0]
+    rotate_robot_initial_yaw(robot, yaw_delta=math.pi)
     print_traversability_map_info(scene)
 
     for _ in range(30):

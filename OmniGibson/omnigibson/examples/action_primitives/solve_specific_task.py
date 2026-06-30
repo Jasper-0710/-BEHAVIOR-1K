@@ -25,7 +25,7 @@ from omnigibson.utils.ui_utils import KeyboardEventHandler
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
 DATASET_SCENES_DIR = os.path.join(REPO_ROOT, "datasets", "behavior-1k-assets", "scenes")
-DEFAULT_SCENE_MODEL = "Pomaria_2_int_data_collection_3"
+DEFAULT_SCENE_MODEL = "Pomaria_2_int_data_collection_5"
 STANDBY_STEPS = 90
 LOOK_AT_STEPS = 90
 FACE_TARGET_STEPS = 120

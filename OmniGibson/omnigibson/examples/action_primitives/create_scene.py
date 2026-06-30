@@ -19,8 +19,11 @@ from omnigibson.utils.ui_utils import KeyboardEventHandler
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
 DATASET_SCENES_DIR = os.path.join(REPO_ROOT, "datasets", "behavior-1k-assets", "scenes")
 DATASET_OBJECTS_DIR = os.path.join(REPO_ROOT, "datasets", "behavior-1k-assets", "objects")
-BASE_SCENE_MODEL = "Pomaria_2_int_data_collection_2"
-OUTPUT_SCENE_MODEL = f"{BASE_SCENE_MODEL}_3"
+BASE_SCENE_MODEL = "Pomaria_2_int_data_collection_4"
+# OUTPUT_SCENE_MODEL = f"{BASE_SCENE_MODEL}_V1"
+OUTPUT_SCENE_MODEL = "Pomaria_2_int_data_collection_5"
+
+
 BASE_SCENE_DIR = os.path.join(DATASET_SCENES_DIR, BASE_SCENE_MODEL)
 BASE_SCENE_PATH = os.path.join(BASE_SCENE_DIR, "json", f"{BASE_SCENE_MODEL}_best.json")
 SCENE_LOAD_EXCLUDE_OBJECTS = {
